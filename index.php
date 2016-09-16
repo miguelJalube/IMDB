@@ -1,10 +1,12 @@
 <?php
+$ini_array = parse_ini_file('config.ini');
+
 //  Expressions régilieres
 define('PATTERN_IS_PARAM','/(page|query)/');
 
 //  Définition des constantes et variables
-define('URL','http://api.themoviedb.org/3');
-define('API','&api_key=db663b344723dd2d6781aed1e2f7764d');
+define('URL',$ini_array['url']);
+define('API',$ini_array['api']);
 define('DOMAIN',$_SERVER['SERVER_NAME']);
 define('METHOD',$_SERVER['REQUEST_METHOD']);
 define('REQUEST_URL',substr($_SERVER['REQUEST_URI'], 1));
@@ -19,9 +21,12 @@ if(isset($urlArray[1])){
 }
 
 //  Verification des $_GET
-if(!empty($_GET['page'])){$urlParams = $_GET['page'];}
-elseif(!empty($_GET['query'])){$urlParams = $_GET['query'];} 
-else{$urlParams = null;}
+if(!empty($_GET['page']))
+    $urlParams = $_GET['page'];
+elseif(!empty($_GET['query']))
+    $urlParams = $_GET['query'];
+else
+    $urlParams = null;
 
 
 //  Autoload
@@ -32,7 +37,7 @@ function __autoload($class_name){
 }
 
 try{     
-    //  Affichage de la page
+//  Affichage de la page
     if(!empty($urlArray[0])){
         $class = '\\controller\\'.ucfirst($urlArray[0]);
         if(!class_exists ($class) || !method_exists ($class,$urlArray[1])){
@@ -50,4 +55,3 @@ try{
 catch(Exception $e){
 	echo 'Exception reçue : ',  $e->getMessage(), "\n";
 }
-?>
