@@ -2,7 +2,7 @@
 
 namespace controller;
 
-class Search{
+class Discover{
 	private $params;
         private $search;
 	

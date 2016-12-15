@@ -13,6 +13,10 @@ define('REQUEST_URL',substr($_SERVER['REQUEST_URI'], 1));
 $urlArray = explode('/',REQUEST_URL);
 define('PREFIX',array_shift($urlArray));
 define('SITE_ROOT', 'http://'.DOMAIN.'/'.PREFIX);
+define('LANGUAGE', '&language=fr-FR');
+
+/*echo'<pre>';
+print_r($urlArray);*/
 
 //  Cherche le terme 'query' dans l'url
 if(isset($urlArray[1])){

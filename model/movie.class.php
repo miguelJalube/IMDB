@@ -41,7 +41,6 @@
                 $this->character = $arg->cast['character'];
                 $this->credit_id = $arg->cast['credit_id'];
                 $this->media_type = $arg->cast['media_type'];
-                exit();
             }elseif($short==null){
                 $this->adult = $arg->adult;
                 $this->id = $arg->id;
@@ -84,7 +83,8 @@
                 $this->vote_count = $arg->vote_count;
                 $this->genre_ids = $arg->genre_ids;
             }
-
+            $this->release_date = new \DateTime($this->release_date);
+            $this->release_date = $this->release_date->format('d.m.Y');
 
         }
         public function getCharacter() {

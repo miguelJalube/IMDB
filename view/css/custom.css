@@ -8,3 +8,22 @@ and open the template in the editor.
     Author     : fasi0229
 */
 
+.justify-align{
+    text-align : justify;
+}
+.bordered-img{
+    margin:0 10px 5px 0;
+    border-radius: 2px;
+}
+.darker{
+    filter: brightness(50%);
+    -webkit-filter: brightness(50%);
+    -moz-filter: brightness(50%);
+    -o-filter: brightness(50%);
+    -ms-filter: brightness(50%);
+}
+.horizontal{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}

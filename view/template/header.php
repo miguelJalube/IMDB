@@ -16,7 +16,21 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <form action="<?php echo SITE_ROOT; ?>/search/movies">
-                        <input placeholder="Rechercher" name="query" class="validate" type="text" />
-                    </form>
+                    <nav>
+                        <div class="nav-wrapper">
+                            <a href="<?php echo SITE_ROOT; ?>" class="brand-logo">IMDB</a>
+                            <ul style="height: 100%;" id="nav-mobile" class="right hide-on-med-and-down">
+                                <li style="height: 100%;">
+                                    <form style="height: 100%;" action="<?php echo SITE_ROOT; ?>/search/multi">
+                                        <div style="height: 100%;" class="input-field">
+                                            <input style="height: 100%;" id="search" name="query" class="validate" type="search" required/>
+                                            <label for="search"><i class="material-icons">search</i></label>
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </form>
+                                </li>
+                             </ul>
+                        </div>
+                    </nav>
                 </div>
+            </div>

@@ -3,19 +3,21 @@
 namespace controller;
 
 class Error{
-	public static function getType($type='controller/Home'){
-            if  ($type = 'controller/Home'){
+	public static function getType($type = null){
+            if($type == 'controller\Home' || $type == null){
                 $data = 'Erreur 404';
-            }  elseif ($type = 'controller/Genre') {
-                $data = 'Erreur 404';
-            }  elseif ($type = 'controller/Movie') {
-                $data = 'Erreur 404';
-            }  elseif ($type = 'controller/Person') {
-                $data = 'Erreur 404';
-            }  elseif ($type = 'controller/Search') {
-                $data = 'Erreur 404';
+            }elseif ($type == 'controller\Genre') {
+                $data = 'Not found genre';
+            }elseif ($type == 'controller\Movie') {
+                $data = 'Not found movie';
+            }elseif ($type == 'controller\Person') {
+                $data = 'Not found actor';
+            }elseif ($type == 'controller\Multi') {
+                $data = 'No results';
+            }else{
+                $data = 'error';
             }
-            require_once('view/error.view.php');
+            return $data;
 	}
 }
 

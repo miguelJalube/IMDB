@@ -33,6 +33,12 @@ namespace model;
                     $this->homepage = $arg->homepage;
                     $this->imdb_id = $arg->imdb_id;
                     $this->place_of_birth = $arg->place_of_birth;
+                    
+                    $this->birthday = new \DateTime($this->birthday);
+                    $this->birthday = $this->birthday->format('d.m.Y');
+                    
+                    $this->deathday = new \DateTime($this->deathday);
+                    $this->deathday = $this->deathday->format('d.m.Y');
                 }
                 elseif($short!=null){
                     $this->known_for = $arg->known_for;
