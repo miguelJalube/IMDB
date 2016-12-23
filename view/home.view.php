@@ -4,6 +4,33 @@
         $data = \controller\Error::getType('controller\Home');
         require_once('view/error.view.php');
     }else{
+       
+        //Pagination de la page
+        $pagination = '<ul class="pagination">';
+        $firstClass = 'waves-effect';
+        $lastClass = 'waves-effect';
+        $firstTag = 'a';
+        $lastTag = 'a';
+        
+        if($this->search == 1){
+            $firstClass = 'disable';
+            $firstTag = 'span';
+        }elseif($this->search == 9){
+            $lastClass = 'disable';                      
+            $lastTag = 'span';
+        }
+        
+        $pagination .= '<li class="'.$firstClass.'"><'.$firstTag.' href="'.SITE_ROOT.'/home/show?page='.($this->search - 1).'"><i class="material-icons">chevron_left</i></'.$firstTag.'></li>';
+        for($i = 1; $i<=9; $i++){
+            if ($i == $this->search){
+                $pagination .= '<li class="active"><a href="'.SITE_ROOT.'/home/show?page='.$i.'">'.$i.'</a></li>';
+            }else{
+                $pagination .= '<li class="waves-effect"><a href="'.SITE_ROOT.'/home/show?page='.$i.'">'.$i.'</a></li>';
+            }
+        }
+        $pagination .= '<li class="'.$lastClass.'"><'.$lastTag.' href="'.SITE_ROOT.'/home/show?page='.($this->search + 1).'"><i class="material-icons">chevron_right</i></'.$lastTag.'></li>';
+        $pagination .= '</ul>';
+        
         echo '<div class="row"><div class="col s12 m12"><h4 class header>Films populaires</h4></div><!--/div>';
         echo '<div class="row"-->';
         foreach($data as $key => $c){
@@ -43,9 +70,8 @@
         }
         echo '</div>';
     }
-    echo '<div class="col s12">';
-    echo $back;
-    echo $next;
+    echo '<div class="center col s12">';
+    echo $pagination;
     echo '</div>';
     require_once('template/footer.php');
 ?>

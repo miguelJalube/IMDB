@@ -31,58 +31,11 @@
         private $vote_count;
 
         function __construct($arg, $short = null) {          
-            if(isset($arg->cast)){
-                $this->adult = $arg->cast['adult'];
-                $this->id = $arg->cast['id'];
-                $this->original_title = $arg->cast['original_title'];
-                $this->release_date = $arg->cast['release_date'];
-                $this->poster_path = $arg->cast['poster_path'];
-                $this->title = $arg->cast['title'];
-                $this->character = $arg->cast['character'];
-                $this->credit_id = $arg->cast['credit_id'];
-                $this->media_type = $arg->cast['media_type'];
-            }elseif($short==null){
-                $this->adult = $arg->adult;
-                $this->id = $arg->id;
-                $this->original_title = $arg->original_title;
-                $this->release_date = $arg->release_date;
-                $this->poster_path = $arg->poster_path;
-                $this->title = $arg->title;
-                $this->backdrop_path = $arg->backdrop_path;
-                $this->original_language = $arg->original_language;
-                $this->overview = $arg->overview;
-                $this->popularity = $arg->popularity;
-                $this->video = $arg->video;
-                $this->vote_average = $arg->vote_average;
-                $this->vote_count = $arg->vote_count;
-                $this->genres = $arg->genres;
-                $this->budget = $arg->budget;
-                $this->homepage = $arg->homepage;
-                $this->belongs_to_collection = $arg->belongs_to_collection;
-                $this->tagline = $arg->tagline;
-                $this->status = $arg->status;
-                $this->production_companies = $arg->production_companies;
-                $this->production_countries = $arg->production_countries;
-                $this->imdb_id = $arg->imdb_id;
-                $this->revenue = $arg->revenue;
-                $this->runtime = $arg->runtime;
-                $this->spoken_languages = $arg->spoken_languages;
-            }elseif($short!=null){
-                $this->adult = $arg->adult;
-                $this->id = $arg->id;
-                $this->original_title = $arg->original_title;
-                $this->release_date = $arg->release_date;
-                $this->poster_path = $arg->poster_path;
-                $this->title = $arg->title;
-                $this->backdrop_path = $arg->backdrop_path;
-                $this->original_language = $arg->original_language;
-                $this->overview = $arg->overview;
-                $this->popularity = $arg->popularity;
-                $this->video = $arg->video;
-                $this->vote_average = $arg->vote_average;
-                $this->vote_count = $arg->vote_count;
-                $this->genre_ids = $arg->genre_ids;
+            foreach($arg as $key => $value){
+                $this->$key = $value;
             }
+            
+            //Date format
             $this->release_date = new \DateTime($this->release_date);
             $this->release_date = $this->release_date->format('d.m.Y');
 

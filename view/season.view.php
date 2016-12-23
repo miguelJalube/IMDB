@@ -8,14 +8,15 @@
         $id = $data[0][0]->getId();
         $link = SITE_ROOT.'/tv/show/'.$id;
         $header = $data[0][0]->getName();
-        $description = $data[0][0]->getOverview();
-        $name = $data[0][0]->getName();
-        $poster = $images[0][0]->getBackdrops();
+        $description = $season[0][0]->getOverview();
+        $name = $season[0][0]->getName();
+        $poster = $data[0][0]->getBackdrop_path();
+        $number = $season[0][0]->getSeason_number();
         //$poster = $images[0][0]->getBackdrops();
-        $first_air_date = $data[0][0]->getFirst_air_date();
+        $first_air_date = $season[0][0]->getAir_date();
         
         //acteurs
-        $count = 1;
+        /*$count = 1;
         $people = '<p><strong>Acteurs:</strong> ';
         if($credits != null){
             foreach($credits[0] as $value){
@@ -24,22 +25,7 @@
                 $count++;
             }
         }
-        $people .= '</p>';
-        
-        //Saisons
-        $count = 1;
-        $seasons = '<p><strong>Saisons:</strong></p><div class="carousel carousel2">';
-        if($data[0][0]->getSeasons() != null){
-            $seasonArray = $data[0][0]->getSeasons();
-            array_shift($seasonArray);
-            $nbSeasons = count($seasonArray);
-            $width = (100 / $nbSeasons);
-            foreach($seasonArray as $value){
-                $seasons .= '<a title="Saison '.$value->season_number.'" class="carousel-item" href="'.SITE_ROOT.'/tv/season/'.$id.'/'.$value->season_number.'"><img style="" src="http://image.tmdb.org/t/p/w185'.$value->poster_path.'"></a>';
-                $count++;
-            }
-        }
-        $seasons .= '</div>';
+        $people .= '</p>';*/
         
         //Bande annonce
         $player='';
@@ -61,17 +47,18 @@
         }
         $genres.=  '</p>';
         
-        $count=1;
-        $image = '<div style="height: 497px;" class="carousel carousel2">';
+        /*$count=1;
+        $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        $image = '<div class="carousel">';
         foreach($images[0][0]->getBackdrops() as $value){
-            $image .='<a style="width:100%;" class="carousel-item" href="#"><img src="http://image.tmdb.org/t/p/w1280'.$value->file_path.'"></a>';
+            $image .='<a class="carousel-item" href="#'.$f->format($count).'!"><img style="width:100%;" src="http://image.tmdb.org/t/p/w185'.$value->file_path.'"></a>';
             $count++;
         }
-        $image.= '</div>';
+        $image.= '</div>';*/
         
-        $image = '<div class="card-image">'.$image.'</div>';
-        //$image = '<div class="card-image"><img style="width:100%;" src="http://image.tmdb.org/t/p/w1280'.$poster.'"/></div>';
-        $content = '<div class="card-content"><p><strong>Nom</strong>: '.$header.'</p><p><strong>Description:</strong> '.$description.'</p><p><strong>Date de la première diffusion</strong>: '.$first_air_date.'</p>'.$genres.$people.$seasons.'</div>';
+        //$image = '<div class="card-image">'.$image.'</div>';
+        $image = '<div class="card-image"><img src="http://image.tmdb.org/t/p/w1280'.$poster.'"/></div>';
+        $content = '<div class="card-content"><p><strong>Série</strong>: '.$header.' '.$name.'<p><strong>Saison:</strong> '.$number.'<p><strong>Description:</strong> '.$description.'</p><p><strong>Date de la première diffusion</strong>: '.$first_air_date.'</p>'.$genres.'</div>';
         $tag = '<div class="card">';
         $col = 'col s12 m12';
         echo '<div class="'.$col.'">'.$tag.$image.$content.'</div></div>';

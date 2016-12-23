@@ -8,16 +8,17 @@ class Request {
     private $typeObj = array();
 
     public function __construct($url, $typeObj) {
-        foreach ($url as $v){
-            if(file_get_contents(URL . $v . API) == null){
-                $this->content = null;
-            }else{
-                $this->content[] = json_decode(file_get_contents(URL . $v . API));
+            foreach($typeObj as $v){
+                $this->typeObj[] = '\\model\\'.$v;
             }
-        }
-        foreach($typeObj as $v){
-            $this->typeObj[] = '\\model\\'.$v;
-        }
+            foreach ($url as $v){                
+                if(!http_request_code(URL.$v.API)){
+                    $this->content = null;
+                    $this->typeObj = null;
+                }else{
+                    $this->content[] = json_decode(file_get_contents(URL.$v.API));
+                }
+            }
     }
 
     /*Instancie les objets
@@ -40,8 +41,11 @@ class Request {
                     foreach ($value->cast as $result) {
                       $array[$key][] = new $this->typeObj[$key]($result, true);
                     }
-                }
-                else {
+                }elseif(isset($value->crew)){
+                    foreach ($value->crew as $result) {
+                      $array[$key][] = new $this->typeObj[$key]($result, true);
+                    }
+                }else{
                     $array[$key][] = new $this->typeObj[$key]($value);
                 }
             }

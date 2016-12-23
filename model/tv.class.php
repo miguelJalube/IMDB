@@ -26,33 +26,12 @@
         private $status;
         private $vote_average;
         private $vote_count;
+        private $seasons;
 
         function __construct($arg, $short = null) {          
-                $this->id = $arg->id;
-                $this->original_name = $arg->original_name;
-                $this->first_air_date = $arg->first_air_date;
-                $this->poster_path = $arg->poster_path;
-                $this->name = $arg->name;
-                $this->backdrop_path = $arg->backdrop_path;
-                $this->languages = $arg->languages;
-                $this->overview = $arg->overview;
-                $this->popularity = $arg->popularity;
-                $this->vote_average = $arg->vote_average;
-                $this->vote_count = $arg->vote_count;
-                $this->genres = $arg->genres;
-                $this->homepage = $arg->homepage;
-                $this->status = $arg->status;
-                $this->production_companies = $arg->production_companies;
-                $this->created_by = $arg->created_by;
-                $this->episode_run_time = $arg->episode_run_time;
-                $this->in_production = $arg->in_production;
-                $this->last_air_date = $arg->last_air_date;
-                $this->networks = $arg->networks;
-                $this->number_of_episodes = $arg->number_of_episodes;
-                $this->number_of_seasons = $arg->number_of_seasons;
-                $this->origin_country = $arg->origin_country;
-                $this->type = $arg->type;
-                $this->original_language = $arg->original_language;
+                foreach($arg as $key => $value){
+                    $this->$key = $value;
+                }
                 
                 $this->last_air_date = new \DateTime($this->last_air_date);
                 $this->last_air_date = $this->last_air_date->format('d.m.Y');
@@ -60,6 +39,14 @@
                 $this->first_air_date = new \DateTime($this->first_air_date);
                 $this->first_air_date = $this->first_air_date->format('d.m.Y');
         }
+        public function getSeasons() {
+            return $this->seasons;
+        }
+
+        public function setSeasons($seasons) {
+            $this->seasons = $seasons;
+        }
+        
         public function getCreated_by() {
             return $this->created_by;
         }

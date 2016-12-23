@@ -19,30 +19,15 @@ namespace model;
             private $known_for;
             
             function __construct($arg, $short = null) {
-                $this->adult = $arg->adult;
-                $this->id = $arg->id;
-                $this->name = $arg->name;
-                $this->popularity = $arg->popularity;
-                $this->profile_path = $arg->profile_path;
-                if($short==null){
-                    $this->also_known_as = $arg->also_known_as;
-                    $this->biography = $arg->biography;
-                    $this->birthday = $arg->birthday;
-                    $this->deathday = $arg->deathday;
-                    $this->gender = $arg->gender;
-                    $this->homepage = $arg->homepage;
-                    $this->imdb_id = $arg->imdb_id;
-                    $this->place_of_birth = $arg->place_of_birth;
-                    
-                    $this->birthday = new \DateTime($this->birthday);
-                    $this->birthday = $this->birthday->format('d.m.Y');
-                    
-                    $this->deathday = new \DateTime($this->deathday);
-                    $this->deathday = $this->deathday->format('d.m.Y');
+                foreach($arg as $key => $value){
+                    $this->$key = $value;
                 }
-                elseif($short!=null){
-                    $this->known_for = $arg->known_for;
-                }
+                    
+                $this->birthday = new \DateTime($this->birthday);
+                $this->birthday = $this->birthday->format('d.m.Y');
+                
+                $this->deathday = new \DateTime($this->deathday);
+                $this->deathday = $this->deathday->format('d.m.Y');
             }
             
             public function getKnown_for() {

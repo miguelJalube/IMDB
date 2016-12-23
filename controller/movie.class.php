@@ -14,7 +14,6 @@ class Movie{
 	public function show(){
 		try{
                     if(is_numeric($this->params[2])){
-                        
                         //data
                         $url[0] = '/'.$this->params[0].'/'.$this->params[2].'?'.LANGUAGE;
                         $request = new \model\Request($url, array('Movie'));
@@ -29,6 +28,11 @@ class Movie{
                         $url[0] = '/'.$this->params[0].'/'.$this->params[2].'/images?';
                         $request = new \model\Request($url,array('Image'));
                         $images = $request->execute();
+                        
+                        //actors
+                        $url[0] = '/'.$this->params[0].'/'.$this->params[2].'/credits?';
+                        $request = new \model\Request($url,array('Credits'));
+                        $credits = $request->execute();
                         
                         //view
                         require_once('view/movie.view.php');
