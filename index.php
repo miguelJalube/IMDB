@@ -32,11 +32,10 @@ if(isset($_GET)){
 }
 
 //  Autoload
-function __autoload($class_name){
-    if(file_exists($class_name . '.class.php')){
-        require_once $class_name . '.class.php';
-    }
+function my_autoloader($class){
+    include_once (strtolower(str_replace('\\', '/', $class))). '.class.php';
 }
+spl_autoload_register('my_autoloader');
 
 //  Affichage de la page
 if($urlArray[0] != null){
