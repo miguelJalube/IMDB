@@ -5,34 +5,50 @@
         private $backdrops;
         private $posters;
 
-        function __construct($arg, $short = null) {
-            foreach($arg as $key => $value){
-                $this->$key = $value;
-            }
+        //  Constructeur
+        function __construct($data) {
+            $this->hydrate($data);
         }
         
-        public function getId() {
+        //  Fonction permettant d'instancier automatiquement l'objet
+	public function hydrate($data) {
+            foreach ($data as $key => $value) {
+                $method = 'set' . ucfirst($key);
+                if(!isset($value)){
+                    $v = null;
+                }else{
+                    $v = $value;
+                }
+                if (method_exists($this, $method)) {
+                        $this -> $method($v);
+                }
+            }
+	}
+        
+        function getId() {
             return $this->id;
         }
 
-        public function getBackdrops() {
+        function getBackdrops() {
             return $this->backdrops;
         }
 
-        public function getPosters() {
+        function getPosters() {
             return $this->posters;
         }
 
-        public function setId($id) {
+        function setId($id) {
             $this->id = $id;
         }
 
-        public function setBackdrops($backdrops) {
+        function setBackdrops($backdrops) {
             $this->backdrops = $backdrops;
         }
 
-        public function setPosters($posters) {
+        function setPosters($posters) {
             $this->posters = $posters;
         }
+
+
     }
 ?>

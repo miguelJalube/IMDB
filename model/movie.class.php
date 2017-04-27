@@ -30,225 +30,249 @@
         private $vote_average;
         private $vote_count;
 
-        function __construct($arg, $short = null) {          
-            foreach($arg as $key => $value){
-                $this->$key = $value;
+        //  Constructeur
+        function __construct($data) {
+            $this->hydrate($data);
+        }
+        
+        //  Fonction permettant d'instancier automatiquement l'objet
+	public function hydrate($data) {
+            foreach ($data as $key => $value) {
+                $method = 'set' . ucfirst($key);
+                if(!isset($value)){
+                    $v = null;
+                }else{
+                    $v = $value;
+                }
+                if (method_exists($this, $method)) {
+                        $this -> $method($v);
+                }
             }
-            
-            //Date format
-            $this->release_date = new \DateTime($this->release_date);
-            $this->release_date = $this->release_date->format('d.m.Y');
-
-        }
-        public function getCharacter() {
-            return $this->character;
-        }
-
-        public function getCredit_id() {
-            return $this->credit_id;
-        }
-
-        public function getMedia_type() {
-            return $this->media_type;
-        }
-
-        public function setCharacter($character) {
-            $this->character = $character;
-        }
-
-        public function setCredit_id($credit_id) {
-            $this->credit_id = $credit_id;
-        }
-
-        public function setMedia_type($media_type) {
-            $this->media_type = $media_type;
-        }
-
-
-        public function getBackdrop_path() {
-            return $this->backdrop_path;
-        }
-
-        public function getBelongs_to_cellection() {
-            return $this->belongs_to_cellection;
-        }
-
-        public function getBudget() {
-            return $this->budget;
-        }
-
-        public function getGenres() {
-            return $this->genres;
-        }
-
-        public function getAdult() {
+	}
+        
+        function getAdult() {
             return $this->adult;
         }
 
-        public function getHomepage() {
+        function getBackdrop_path() {
+            return $this->backdrop_path;
+        }
+
+        function getBelongs_to_cellection() {
+            return $this->belongs_to_cellection;
+        }
+
+        function getBudget() {
+            return $this->budget;
+        }
+
+        function getCharacter() {
+            return $this->character;
+        }
+
+        function getCredit_id() {
+            return $this->credit_id;
+        }
+
+        function getGenres() {
+            return $this->genres;
+        }
+
+        function getHomepage() {
             return $this->homepage;
         }
 
-        public function getId() {
+        function getId() {
             return $this->id;
         }
 
-        public function getImdb_id() {
+        function getImdb_id() {
             return $this->imdb_id;
         }
 
-        public function getOriginal_language() {
+        function getMedia_type() {
+            return $this->media_type;
+        }
+
+        function getOriginal_language() {
             return $this->original_language;
         }
 
-        public function getOriginal_title() {
+        function getOriginal_title() {
             return $this->original_title;
         }
 
-        public function getOverview() {
+        function getOverview() {
             return $this->overview;
         }
 
-        public function getPopularity() {
+        function getPopularity() {
             return $this->popularity;
         }
 
-        public function getPoster_path() {
+        function getPoster_path() {
             return $this->poster_path;
         }
 
-        public function getProduction_companies() {
+        function getProduction_companies() {
             return $this->production_companies;
         }
 
-        public function getProduction_countries() {
+        function getProduction_countries() {
             return $this->production_countries;
         }
 
-        public function getRelease_date() {
+        function getRelease_date() {
             return $this->release_date;
         }
 
-        public function getRevenue() {
+        function getRevenue() {
             return $this->revenue;
         }
 
-        public function getRuntime() {
+        function getRuntime() {
             return $this->runtime;
         }
 
-        public function getSpoken_languages() {
+        function getSpoken_languages() {
             return $this->spoken_languages;
         }
 
-        public function getStatus() {
+        function getStatus() {
             return $this->status;
         }
 
-        public function getTagline() {
+        function getTagline() {
             return $this->tagline;
         }
 
-        public function getTitle() {
+        function getTitle() {
             return $this->title;
         }
 
-        public function getVideo() {
+        function getVideo() {
             return $this->video;
         }
 
-        public function getVote_average() {
+        function getVote_average() {
             return $this->vote_average;
         }
 
-        public function getVote_count() {
+        function getVote_count() {
             return $this->vote_count;
         }
 
-        public function setAdult($adult) {
+        function setAdult($adult) {
             $this->adult = $adult;
         }
 
-        public function setHomepage($homepage) {
+        function setBackdrop_path($backdrop_path) {
+            $this->backdrop_path = $backdrop_path;
+        }
+
+        function setBelongs_to_cellection($belongs_to_cellection) {
+            $this->belongs_to_cellection = $belongs_to_cellection;
+        }
+
+        function setBudget($budget) {
+            $this->budget = $budget;
+        }
+
+        function setCharacter($character) {
+            $this->character = $character;
+        }
+
+        function setCredit_id($credit_id) {
+            $this->credit_id = $credit_id;
+        }
+
+        function setGenres($genres) {
+            $this->genres = $genres;
+        }
+
+        function setHomepage($homepage) {
             $this->homepage = $homepage;
         }
 
-        public function setId($id) {
+        function setId($id) {
             $this->id = $id;
         }
 
-        public function setImdb_id($imdb_id) {
+        function setImdb_id($imdb_id) {
             $this->imdb_id = $imdb_id;
         }
 
-        public function setOriginal_language($original_language) {
+        function setMedia_type($media_type) {
+            $this->media_type = $media_type;
+        }
+
+        function setOriginal_language($original_language) {
             $this->original_language = $original_language;
         }
 
-        public function setOriginal_title($original_title) {
+        function setOriginal_title($original_title) {
             $this->original_title = $original_title;
         }
 
-        public function setOverview($overview) {
+        function setOverview($overview) {
             $this->overview = $overview;
         }
 
-        public function setPopularity($popularity) {
+        function setPopularity($popularity) {
             $this->popularity = $popularity;
         }
 
-        public function setPoster_path($poster_path) {
+        function setPoster_path($poster_path) {
             $this->poster_path = $poster_path;
         }
 
-        public function setProduction_companies($production_companies) {
+        function setProduction_companies($production_companies) {
             $this->production_companies = $production_companies;
         }
 
-        public function setProduction_countries($production_countries) {
+        function setProduction_countries($production_countries) {
             $this->production_countries = $production_countries;
         }
 
-        public function setRelease_date($release_date) {
-            $this->release_date = $release_date;
+        function setRelease_date($release_date) {
+            $this->release_date = dateFormat($release_date);
         }
 
-        public function setRevenue($revenue) {
+        function setRevenue($revenue) {
             $this->revenue = $revenue;
         }
 
-        public function setRuntime($runtime) {
+        function setRuntime($runtime) {
             $this->runtime = $runtime;
         }
 
-        public function setSpoken_languages($spoken_languages) {
+        function setSpoken_languages($spoken_languages) {
             $this->spoken_languages = $spoken_languages;
         }
 
-        public function setStatus($status) {
+        function setStatus($status) {
             $this->status = $status;
         }
 
-        public function setTagline($tagline) {
+        function setTagline($tagline) {
             $this->tagline = $tagline;
         }
 
-        public function setTitle($title) {
+        function setTitle($title) {
             $this->title = $title;
         }
 
-        public function setVideo($video) {
+        function setVideo($video) {
             $this->video = $video;
         }
 
-        public function setVote_average($vote_average) {
+        function setVote_average($vote_average) {
             $this->vote_average = $vote_average;
         }
 
-        public function setVote_count($vote_count) {
+        function setVote_count($vote_count) {
             $this->vote_count = $vote_count;
         }
-
 
     }
 ?>

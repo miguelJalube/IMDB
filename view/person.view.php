@@ -6,7 +6,7 @@
     }
     else{                
         $header = $data[0][0]->getName();
-        $poster = '<img alt="'.$header.'" class="bordered-img" src="http://image.tmdb.org/t/p/w300'.$data[0][0]->getProfile_path().'"/>';
+        $poster = '<img alt="'.$header.'" class="bordered-img" src="'.$data[0][0]->getProfile_path().'"/>';
         $description = $data[0][0]->getBiography();
         $birthday = $data[0][0]->getBirthday();
         $place_of_birth = $data[0][0]->getPlace_of_birth();
