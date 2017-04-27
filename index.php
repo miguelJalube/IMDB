@@ -1,6 +1,6 @@
 <?php
 //Teste les requetes HTTP
-require_once 'http_request_code.php';
+require_once 'functions.php';
 
 //Parcoure le fichier ini et le stocke dans un tableau
 $ini_array = parse_ini_file('config.ini');
@@ -19,16 +19,9 @@ define('SITE_ROOT', 'http://'.DOMAIN.'/'.PREFIX);
 define('LANGUAGE', '&language=fr-FR');
 
 //  Cherche le terme 'query' dans l'url
-if(isset($urlArray[1])){
+if(isset($urlArray[1]) && $urlArray[1] != null){
     $isQuery = preg_match(PATTERN_IS_PARAM,$urlArray[1]);
     $isQuery == 1 ? $urlArray[1] = stristr($urlArray[1], '?',true) : $urlArray[1] = $urlArray[1];
-}
-
-$urlParams = null;
-if(isset($_GET)){
-    foreach($_GET as $key => $value){
-        $urlParams = $value;
-    }
 }
 
 //  Autoload
@@ -37,17 +30,27 @@ function my_autoloader($class){
 }
 spl_autoload_register('my_autoloader');
 
+$urlParams = null;
+if(isset($_GET)){
+    foreach($_GET as $key => $value){
+        $urlParams = $value;
+    }
+}
+
 //  Affichage de la page
 if($urlArray[0] != null){
     $class = '\\controller\\'.ucfirst($urlArray[0]);
-    if(!class_exists ($class) || !method_exists ($class,$urlArray[1])){
+    $method = $urlArray[1];
+    
+    if(!class_exists ($class) || !method_exists ($class,$method)){
         \controller\Error::getType();
         exit();
     }
     $Controller = new $class($urlArray, $urlParams);
-    echo $Controller->$urlArray[1]();
+    
+    $Controller->$method();
 }else{
     $class = '\\controller\\Home';
     $Controller = new $class();
-    echo $Controller->show(NULL,1);
+    $Controller->show(NULL,1);
 }

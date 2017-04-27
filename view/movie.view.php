@@ -43,6 +43,9 @@
         //images
         $count=1;
         $image = '<div style="height: 497px;" class="carousel carousel2">';
+        if($images[0][0]->getBackdrops() == null || $images[0][0]->getBackdrops() == ''){
+            $image .='<a style="width:100%;" class="carousel-item" href="#"><img src="../../view/images/1280.jpg"></a>';
+        }
         foreach($images[0][0]->getBackdrops() as $value){
             $image .='<a style="width:100%;" class="carousel-item" href="#"><img src="http://image.tmdb.org/t/p/w1280'.$value->file_path.'"></a>';
             $count++;
